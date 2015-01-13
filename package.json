@@ -1,0 +1,30 @@
+{
+  "name": "twitch.tv",
+  "version": "1.0.0",
+  "description": "Library for Twitch.tv's REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:medimatrix/twitch.tv.git"
+  },
+  "keywords": [
+    "twitch",
+    "rest",
+    "api"
+  ],
+  "author": "Médi-Rémi Hashim",
+  "license": "GPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/medimatrix/twitch.tv/issues"
+  },
+  "homepage": "https://github.com/medimatrix/twitch.tv",
+  "dependencies": {
+    "request": "^2.51.0"
+  },
+  "devDependencies": {
+    "tape": "^3.0.3"
+  }
+}
