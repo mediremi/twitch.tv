@@ -9,7 +9,7 @@ node.js lib for Twitch.tv's REST API
 ```js
 var twitch = require("twitch.tv")
 
-twitch("streams", function(res) {
+twitch("streams", function(err, res) {
   console.log(res)
 })
 ```
@@ -21,8 +21,37 @@ twitch("streams", function(res) {
 Default options:
 ```js
 {
-  "User-Agent": options.ua || "node.js twitch.tv by mediremi",
-  "Accept": "application/vnd.twitchtv.v" + (options.apiVersion || "2") + "+json",
-  "Client-ID": options.clientID || ""
+  ua: "node.js twitch.tv by mediremi",
+  apiVersion: "2",
+  clientID: ""
 }
+```
+
+* `options.baseUrl` -> `Twitch.tv` API base URL
+* `options.ua` -> User agent sent to `Twitch.tv`
+* `options.apiVersion` -> API version used
+* `options.clientID` -> Client ID provided by `Twitch.tv`. Used for rate-limiting
+
+`callback` is called with two parameters: `err` and `response`.
+
+> [Available Twitch API methods](https://github.com/justintv/twitch-api#index)
+
+Examples:
+
+```js
+twitch("channel", function(err, res) {
+  console.log(res)
+})
+
+twitch("games/top", function(err, res) {
+  if (err) return console.error(err)
+
+  console.log(res.top)
+})
+
+twitch("videos/top", {
+  ua: "get-cool-twitch-vids.com",
+  apiVersion: 1,
+  clientID: "axjhfp777tflhy0yjb5sftsil"
+})
 ```

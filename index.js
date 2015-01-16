@@ -1,18 +1,16 @@
 var request = require("request")
 
-var baseUrl = "https://api.twitch.tv/kraken/"
+module.exports = function getAPI(apiMethod, options, callback) {
+	var baseUrl = "https://api.twitch.tv/kraken/"
 
-function capitalize(word) {
-	return word[0].toUpperCase() + word.slice(1)
-}
-
-function getAPI(apiMethod, options, callback) {
 	if (typeof options === "function") {
 		callback = options
 		options = null
 	}
 
 	options = options || {}
+
+	baseUrl = options.baseUrl || baseUrl
 
 	var headers = {
 		"User-Agent": options.ua || "node.js twitch.tv by mediremi",
@@ -25,15 +23,10 @@ function getAPI(apiMethod, options, callback) {
 		headers: headers
 	}, function(error, response, body) {
 		if (!error && response.statusCode == 200) {
+			// TODO: What if JSON.parse throws an error?
 			callback(null, JSON.parse(body))
 		} else {
 			callback(error, null)
 		}
 	})
 }
-
-exports = module.exports = getAPI
-
-;["streams", "teams", "games/top"].forEach(function(apiMethod) {
-	exports["get" + capitalize(apiMethod)] = getAPI.bind(null, apiMethod)
-})
