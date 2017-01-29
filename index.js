@@ -14,7 +14,7 @@ module.exports = function getAPI(apiMethod, options, callback) {
 
 	var headers = {
 		"User-Agent": options.ua || "node.js twitch.tv by mediremi",
-		"Accept": "application/vnd.twitchtv.v" + (options.apiVersion || "2") + "+json",
+		"Accept": "application/vnd.twitchtv.v" + (options.apiVersion || "3") + "+json",
 		"Client-ID": options.clientID || ""
 	}
 
@@ -22,10 +22,25 @@ module.exports = function getAPI(apiMethod, options, callback) {
 		url: baseUrl + apiMethod,
 		headers: headers
 	}, function(error, response, body) {
-		if (!error && response.statusCode == 200) {
-			// TODO: What if JSON.parse throws an error?
-			callback(null, JSON.parse(body))
-		} else {
+		if (!error) {
+			// catch JSON parse errors
+			try {
+				var parsedBody = JSON.parse(body);
+			} catch(e){
+				return callback(e, null);
+			}
+
+			// API returned a success
+			if(response.statusCode == 200){
+				callback(null, parsedBody)
+			}
+			// API returned an error
+			else {
+				callback(parsedBody, null)
+			}
+		}
+		// errors during request
+		else {
 			callback(error, null)
 		}
 	})

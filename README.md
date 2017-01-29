@@ -22,7 +22,7 @@ Default options:
 ```js
 {
   ua: "node.js twitch.tv by mediremi",
-  apiVersion: "2",
+  apiVersion: "3",
   clientID: ""
 }
 ```
@@ -53,5 +53,10 @@ twitch("videos/top", {
   ua: "get-cool-twitch-vids.com",
   apiVersion: 1,
   clientID: "axjhfp777tflhy0yjb5sftsil"
+})
+
+twitch("channels/44322889", {
+  apiVersion: 5,
+  clientID: "uo6dggojyb8d6soh92zknwmi5ej1q2"
 })
 ```

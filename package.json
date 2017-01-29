@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "express": "^4.11.0",
+    "sync": "^0.2.5",
     "tape": "^3.0.3"
   }
 }
