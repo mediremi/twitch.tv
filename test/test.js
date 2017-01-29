@@ -1,5 +1,4 @@
 var test = require("tape")
-var sync = require("sync")
 var twitch = require("../")
 
 function testAPI(t) {
