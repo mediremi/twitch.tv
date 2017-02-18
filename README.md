@@ -31,6 +31,7 @@ Default options:
 * `options.ua` -> User agent sent to `Twitch.tv`
 * `options.apiVersion` -> API version used
 * `options.clientID` -> Client ID provided by `Twitch.tv`. Used for rate-limiting
+* `options.auth` -> OAuth token provided by `Twitch.tv`. Used for privileged requests ([doc here](https://dev.twitch.tv/docs/v5/guides/authentication/))
 
 `callback` is called with two parameters: `err` and `response`.
 
@@ -58,5 +59,12 @@ twitch("videos/top", {
 twitch("channels/44322889", {
   apiVersion: 5,
   clientID: "uo6dggojyb8d6soh92zknwmi5ej1q2"
+})
+
+// https://dev.twitch.tv/docs/v5/reference/users/#get-user
+twitch("user", {
+  apiVersion: 5,
+  clientID: "uo6dggojyb8d6soh92zknwmi5ej1q2",
+  auth: "cfabdegwdoklmawdzdo98xt2fo512y"
 })
 ```
