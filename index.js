@@ -18,6 +18,10 @@ module.exports = function getAPI(apiMethod, options, callback) {
 		"Client-ID": options.clientID || ""
 	}
 
+	if (typeof options.auth === "string"){
+		headers["Authorization"] = "OAuth " + options.auth;
+	}
+
 	request({
 		url: baseUrl + apiMethod,
 		headers: headers
